@@ -34,7 +34,7 @@ class handDetector():
 
         return results
 
-    def findPosition(self, img, detections, hand, indexes):
+    def findPosition(self, img, detections, hand, indexes, mark=True):
         if detections.multi_hand_landmarks:
             for handID, handLms in enumerate(detections.multi_hand_landmarks):
                 for id, lm in enumerate(handLms.landmark):
@@ -42,8 +42,9 @@ class handDetector():
                         h, w, c = img.shape
                         cx, cy = int(lm.x*w), int(lm.y*h)
                         print(f"ID: {id} x = {cx} y = {cy}")
-                        cv2.circle(img, center=(cx, cy), radius=10, 
-                                    color=(255,0,0), thickness=cv2.FILLED)
+                        if mark == True:
+                            cv2.circle(img, center=(cx, cy), radius=10, 
+                                        color=(255,0,0), thickness=cv2.FILLED)
 
 def main():
     pTime = 0
