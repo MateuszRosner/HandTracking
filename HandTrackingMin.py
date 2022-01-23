@@ -3,6 +3,7 @@ import cv2
 import mediapipe as mp
 import time
 
+
 cap = cv2.VideoCapture(0)
 
 mpHands = mp.solutions.hands
@@ -24,9 +25,10 @@ while True:
                 h, w, c = img.shape
                 cx, cy = int(lm.x*w), int(lm.y*h)
                 print(f"ID: {id} x = {cx} y = {cy}")
-                if id == 0:
+                if id % 4 == 0:
                     cv2.circle(img, center=(cx, cy), radius=10, 
                                 color=(255,0,0), thickness=cv2.FILLED)
+                
 
             mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
 
