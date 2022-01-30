@@ -32,6 +32,9 @@ class handDetector():
                 for id, lm in enumerate(handLms.landmark):
                     self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
 
+            """for hand_world_landmarks in self.results.multi_hand_world_landmarks:
+                self.mpDraw.plot_landmarks(hand_world_landmarks, self.mpHands.HAND_CONNECTIONS, azimuth=5)"""
+
     def findPosition(self, img, hand, indexes, mark=True):
         if self.results.multi_hand_landmarks:
             for handID, handLms in enumerate(self.results.multi_hand_landmarks):
@@ -39,7 +42,7 @@ class handDetector():
                     if handID in hand and id in indexes:
                         h, w, c = img.shape
                         cx, cy = int(lm.x*w), int(lm.y*h)
-                        print(f"ID: {id} x = {cx} y = {cy}")
+                        print(f"ID: {id} x = {cx} y = {cy}, z = {lm.z}")
                         if mark == True:
                             cv2.circle(img, center=(cx, cy), radius=10, 
                                         color=(255,0,0), thickness=cv2.FILLED)
