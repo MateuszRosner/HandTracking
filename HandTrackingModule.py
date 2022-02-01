@@ -33,8 +33,6 @@ class handDetector():
                 for id, lm in enumerate(handLms.landmark):
                     self.mpDraw.draw_landmarks(image, handLms, self.mpHands.HAND_CONNECTIONS)
 
-            """for hand_world_landmarks in self.results.multi_hand_world_landmarks:
-                self.mpDraw.plot_landmarks(hand_world_landmarks, self.mpHands.HAND_CONNECTIONS, azimuth=5)"""
 
     def findPosition(self, img, hand, indexes, mark=True):
         if self.results.multi_hand_landmarks:
