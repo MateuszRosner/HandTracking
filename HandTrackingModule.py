@@ -26,11 +26,12 @@ class handDetector():
     def findHands(self, img):
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.results = self.hands.process(imgRGB)
-        
+
+    def drawLandmarks(self, image):
         if self.results.multi_hand_landmarks:
             for handLms in self.results.multi_hand_landmarks:
                 for id, lm in enumerate(handLms.landmark):
-                    self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
+                    self.mpDraw.draw_landmarks(image, handLms, self.mpHands.HAND_CONNECTIONS)
 
             """for hand_world_landmarks in self.results.multi_hand_world_landmarks:
                 self.mpDraw.plot_landmarks(hand_world_landmarks, self.mpHands.HAND_CONNECTIONS, azimuth=5)"""
@@ -57,6 +58,7 @@ def main():
     while True:
         success, img = cap.read()
         detector.findHands(img)
+        detector.drawLandmarks(img)
         detector.findPosition(img, (0,), (4, 8, 12, 16, 20)) 
         
         cTime = time.time()
